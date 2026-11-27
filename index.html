@@ -43,10 +43,11 @@ img.mascot{visibility:hidden}
 .btn:active:not(:disabled){transform:translateY(6px);box-shadow:0 0 0 var(--ink)}
 .btn.main{background:var(--pink);color:#fff;text-shadow:3px 3px 0 var(--ink)}
 .btn.soft{background:var(--pink2)}
-.btn.sm{font-size:15px;padding:12px 16px}
+.btn.sm{font-size:15px;padding:10px 14px}
 .btn:disabled{opacity:.45;cursor:not-allowed;box-shadow:0 6px 0 var(--ink)}
-.row{display:flex;gap:16px;justify-content:center;align-items:center;min-height:76px}
-#yes{--s:1;transform:scale(var(--s));transition:transform .2s steps(3);padding:8px 28px}
+.row{display:flex;gap:14px;justify-content:center;align-items:center;min-height:84px}
+#yes,#no{width:154px;padding:10px 12px;text-align:center;white-space:nowrap}
+#yes{--s:1;position:relative;z-index:20;transform:scale(var(--s));transition:transform .22s steps(4)}
 #yes:active{transform:scale(calc(var(--s)*.95))}
 #no{touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
 #no.fly{position:fixed;left:0;top:0;z-index:60;transition:transform .2s steps(4);will-change:transform}
@@ -63,8 +64,17 @@ img.mascot{visibility:hidden}
 .times{grid-template-columns:repeat(2,1fr)}
 .times .chip{min-width:0;padding:8px 4px}
 .foods{grid-template-columns:repeat(3,1fr);margin-bottom:14px}
+.foods.editing{grid-template-columns:1fr;max-height:250px;overflow-y:auto;padding-right:2px}
 .foods .chip{padding:10px 2px}
 .foods .chip span{display:block;font-size:30px;line-height:1.2}
+.fadd{display:flex;gap:8px;margin-bottom:14px}
+.fadd input{flex:1;min-width:0;padding:8px 10px;border:4px solid var(--ink);border-radius:0;font-size:15px;background:#fff;color:var(--ink)}
+.fadd input:focus{outline:none;background:var(--pale)}
+.fedit-row{display:grid;grid-template-columns:56px 1fr 42px;gap:6px;align-items:center}
+.fedit-row input{width:100%;padding:6px 8px;border:4px solid var(--ink);border-radius:0;font-size:15px;background:#fff;color:var(--ink)}
+.fedit-row input:first-child{text-align:center;font-size:20px;padding:4px}
+.fdel{border:4px solid var(--ink);background:var(--pale);color:var(--ink);height:40px;font-size:15px;cursor:pointer;padding:0}
+.fdel:hover{background:var(--pink);color:#fff}
 .nav{display:flex;gap:10px;margin-top:8px}
 .nav .grow{flex:1}
 .ticket{position:relative;border:4px dashed var(--ink);background:#fff;padding:20px 14px 12px;margin:10px 0 18px;text-align:left}
@@ -82,7 +92,8 @@ img.mascot{visibility:hidden}
 #modal .sec{color:var(--pink);text-shadow:1px 1px 0 var(--ink);margin:20px 0 2px}
 #modal label{display:block;font-family:'Galmuri11',inherit;font-size:12px;color:var(--muted);margin:10px 0 4px}
 #modal input,#modal textarea{width:100%;padding:8px 10px;border:4px solid var(--ink);border-radius:0;font-size:15px;background:var(--card);color:var(--ink)}
-.frow{display:grid;grid-template-columns:64px 1fr;gap:8px;margin-bottom:8px}.frow input:first-child{text-align:center;font-size:22px;padding:4px}
+.frow{display:grid;grid-template-columns:56px 1fr 42px;gap:8px;margin-bottom:8px;align-items:center}
+.frow input:first-child{text-align:center;font-size:20px;padding:4px}
 .mbar{position:sticky;bottom:-18px;background:#fff;margin:16px -18px -18px;padding:12px 18px;border-top:4px solid var(--ink);display:flex;gap:10px;flex-wrap:wrap}
 #toast{position:fixed;left:50%;bottom:max(22px,env(safe-area-inset-bottom));transform:translate(-50%,20px);background:var(--ink);color:#fff;padding:10px 16px;border:4px solid #fff;outline:4px solid var(--ink);opacity:0;pointer-events:none;z-index:120;max-width:88vw;text-align:center}
 #toast.on{opacity:1;transform:translate(-50%,0)}
@@ -99,7 +110,7 @@ img.mascot{visibility:hidden}
 <main>
   <section id="s-ask" class="card">
     <div class="bar"><span>♥ 밥먹자 퀘스트</span><span>_ □ x</span></div>
-    <div class="pug" id="pug"><img class="mascot" alt=""><div class="bub" id="bubble">😐</div></div>
+    <div class="pug" id="pug"><img class="mascot" alt="퍼그 마스코트"><div class="bub" id="bubble">😐</div></div>
     <h1 id="t-ask"></h1>
     <div class="row">
       <button id="yes" class="btn main" type="button"></button>
@@ -110,7 +121,7 @@ img.mascot{visibility:hidden}
 
   <section id="s-yes" class="card hidden">
     <div class="bar"><span>♥ 수락 완료!</span><span>_ □ x</span></div>
-    <div class="pug dance"><img class="mascot" alt=""><div class="bub">🥳</div></div>
+    <div class="pug dance"><img class="mascot" alt="기뻐하는 퍼그 마스코트"><div class="bub">🥳</div></div>
     <span class="badge">수락 완료 ✓</span>
     <h2 id="t-yes"></h2>
     <p class="sub" id="t-yes2"></p>
@@ -133,7 +144,14 @@ img.mascot{visibility:hidden}
     <h2 id="t-food"></h2>
     <p class="sub" id="t-food2"></p>
     <div class="grid foods" id="foods"></div>
-    <button id="roll" class="btn sm soft" style="width:100%;margin-bottom:16px" type="button">🎲 룰렛으로 정하기</button>
+    <div class="fadd">
+      <input id="food-custom" type="text" maxlength="16" placeholder="직접 입력 (예: 돈까스)" aria-label="음식 메뉴 직접 입력">
+      <button id="food-add" class="btn sm soft" type="button">+ 추가</button>
+    </div>
+    <div class="nav" style="margin-bottom:14px">
+      <button id="roll" class="btn sm soft grow" type="button">🎲 룰렛</button>
+      <button id="food-edit-toggle" class="btn sm" type="button">✏ 메뉴 수정</button>
+    </div>
     <div class="nav">
       <button id="back" class="btn sm" type="button">← 이전</button>
       <button id="lock-food" class="btn main grow" type="button" disabled>확정하기</button>
@@ -172,8 +190,9 @@ img.mascot{visibility:hidden}
   <label for="m-yesT">제목</label><input id="m-yesT">
   <label for="m-yesS">부제</label><input id="m-yesS">
 
-  <div class="sec">▶ 메뉴 9개 (이모지 + 이름)</div>
+  <div class="sec">▶ 메뉴 목록 (이모지 + 이름)</div>
   <div id="m-foods"></div>
+  <button id="m-add-food" class="btn sm soft" style="width:100%;margin-top:6px" type="button">+ 메뉴 추가</button>
   <label for="m-times">고를 수 있는 시간 (쉼표로, 24시간제)</label><input id="m-times" placeholder="12:00, 18:00, 19:30">
 
   <div class="sec">▶ 마지막 화면</div>
@@ -192,23 +211,41 @@ img.mascot{visibility:hidden}
 <script>
 (function(){
 const $=id=>document.getElementById(id);
-const KEY='date_invite_cfg_v3';
+const KEY='date_invite_cfg_v4';
 const DEF={
- ask:'야 이번 주에\n밥 먹자 🍚',yes:'좋아 😆',no:'안 돼',
- teases:['어? 버튼이 왜 이래 ㅋㅋ','방금 손가락 닿을 뻔했다','퍼그가 한심하게 쳐다보는 중 😑','안 돼 버튼 회피율 99%','반응속도 인정','안 돼 버튼은 지금 운동 중 🏃','포기하면 편해 👈','잡으면 내가 밥 산다 (안 잡힘)','손가락 아프겠다 그만해 ㅋㅋ','이쯤 되면 보스전인데?','퍼그 표정 봐 이미 알고 있어','제발 "좋아" 눌러줘 ㅠ'],
- yesT:'오 ㅋㅋ 진짜?!',yesS:'거절하면 어쩌나 했는데 다행이다 ㅋㅋ',go:'일정 정하기 →',
- dateT:'언제가 편해?',foodT:'뭐 먹을까?',foodS:'하나 골라줘. 못 고르겠으면 룰렛!',
- end:'{메뉴} 먹으러 가자!',ps:'P.S. 카톡으로 물어봐도 되는데 그냥 심심해서 만들어 봤어 ㅋㅋ 저 퍼그는 공식 마스코트야.',
+ ask:'이번 주에 시간 괜찮아?\n같이 밥 먹자 🍚',yes:'좋아 😊',no:'안 돼',
+ teases:[
+   '어? 버튼이 도망갔네',
+   '살짝 비켜갔어',
+   '퍼그가 눈치 보는 중 👀',
+   '버튼이 좀 쑥스러운가 봐',
+   '오, 반응속도 빠른데?',
+   '안 돼 버튼 지금 운동 중 🏃',
+   '한 번만 같이 먹어줘 🥺',
+   '맛있는 거 먹으러 가자 🍽️',
+   '손가락 아프겠다 잠깐 쉬어',
+   '이쯤 되면 미니게임인데?',
+   '퍼그도 같이 가고 싶대 🐶',
+   '시간 괜찮으면 "좋아" 눌러줘'
+ ],
+ yesT:'오, 고마워!',yesS:'거절하면 어쩌나 살짝 긴장했는데 다행이다',go:'일정 정하기 →',
+ dateT:'언제가 편해?',foodT:'뭐 먹을까?',foodS:'고르거나 직접 입력·수정할 수 있어!',
+ end:'{메뉴} 먹으러 가자!',ps:'P.S. 카톡으로 물어봐도 되는데 재미로 한 번 만들어 봤어. 편한 시간으로 골라줘!',
  foods:[['🍕','피자'],['🍣','스시'],['🍔','버거'],['🍝','파스타'],['🌮','타코'],['🍜','라멘'],['🥓','삼겹살'],['🍗','치킨'],['🌶️','떡볶이']],
  times:'11:30,12:00,13:00,17:00,18:00,19:00,20:00,21:00'
 };
-const BUBBLES=['😐','😮','🤨','😏','🥺','😤','🤣'],NOS=['','안 돼?','진짜?','아닌데?','잠깐만','헉','도와줘','…'];
+const BUBBLES=['😐','😮','🤨','😏','🥺','😅','🤣'],NOS=['','안 돼?','진짜?','어라?','잠깐만','헉','살려줘','…'];
 const WD=['일','월','화','수','목','금','토'];
 const clone=o=>JSON.parse(JSON.stringify(o));
 let CFG=clone(DEF),fromLink=false;
 function merge(o){if(!o||typeof o!=='object')return;
  for(const k of Object.keys(DEF)){if(o[k]==null||o[k]==='')continue;
-  if(k==='foods'){if(Array.isArray(o.foods)&&o.foods.length===9)CFG.foods=o.foods.map((f,i)=>[String(f[0]||DEF.foods[i][0]),String(f[1]||DEF.foods[i][1])])}
+  if(k==='foods'){
+    if(Array.isArray(o.foods)&&o.foods.length){
+      const clean=o.foods.map(f=>[String((f&&f[0])||'🍽️').trim()||'🍽️',String((f&&f[1])||'').trim()]).filter(f=>f[1]);
+      if(clean.length)CFG.foods=clean;
+    }
+  }
   else if(k==='teases'){if(Array.isArray(o.teases)&&o.teases.length)CFG.teases=o.teases.map(String)}
   else CFG[k]=String(o[k])}}
 const enc=o=>{const b=new TextEncoder().encode(JSON.stringify(o));let s='';b.forEach(c=>s+=String.fromCharCode(c));return btoa(s)};
@@ -216,6 +253,7 @@ const dec=s=>JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(s),c=>c.ch
 try{const m=location.hash.match(/^#c=(.+)$/);if(m){merge(dec(decodeURIComponent(m[1])));fromLink=true}}catch(_){}
 if(!fromLink)try{merge(JSON.parse(localStorage.getItem(KEY)||'null'))}catch(_){}
 if(fromLink&&!/[?&]edit/.test(location.search))$('b-edit').classList.add('hidden');
+const saveCfg=()=>{try{localStorage.setItem(KEY,JSON.stringify(CFG))}catch(_){}};
 
 /* 마스코트: 저장소의 mascot.jpg를 도트(48x48)로 변환해서 표시 (없으면 🐶) */
 const FALL='data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="#ffd3ea"/><text x="50" y="68" font-size="60" text-anchor="middle">🐶</text></svg>');
@@ -230,7 +268,7 @@ document.querySelectorAll('img.mascot').forEach(i=>{i.onerror=()=>{i.onerror=nul
 
 let tt;const toast=m=>{const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2600)};
 const boom=o=>{if(typeof confetti==='function')confetti(Object.assign({shapes:['square'],scalar:1.4,colors:['#ff3d9a','#ff8fc8','#ffe3f1','#4a0830','#fff'],disableForReducedMotion:true},o))};
-const st={step:'ask',n:0,day:null,time:null,food:null,rolling:false};
+const st={step:'ask',n:0,day:null,time:null,food:null,customFood:'',editingFoods:false,rolling:false};
 const TIMES=()=>{const a=CFG.times.split(',').map(s=>s.trim()).filter(s=>/^\d{1,2}:\d{2}$/.test(s));return (a.length?a:DEF.times.split(',')).slice(0,12)};
 const fmtT=t=>{const[h,m]=t.split(':').map(Number);return `${h<12?'오전':'오후'} ${h>12?h-12:h||12}:${String(m).padStart(2,'0')}`};
 const fmtD=d=>`${d.getMonth()+1}월 ${d.getDate()}일`;
@@ -270,7 +308,7 @@ function dodge(e){
   $('tease').textContent=T[Math.min(st.n-1,T.length-1)]+(st.n>3?`  (${st.n})`:'');
   noLabel();
   $('bubble').textContent=BUBBLES[Math.min(Math.floor(st.n/2),BUBBLES.length-1)];
-  yes.style.setProperty('--s',Math.min(1+st.n*.04,1.3).toFixed(2));
+  yes.style.setProperty('--s',Math.min(1+st.n*.15,2.2).toFixed(2));
   pug.classList.remove('wob');void pug.offsetWidth;pug.classList.add('wob');
   if(navigator.vibrate)try{navigator.vibrate(18)}catch(_){}
 }
@@ -313,21 +351,64 @@ function renderTimes(){
     b.textContent=fmtT(t);b.onclick=()=>{st.time=t;renderTimes();checkDate()};box.appendChild(b)});
 }
 const checkDate=()=>{$('lock-date').disabled=!(st.day&&st.time)};
+const hasFood=()=>st.customFood.trim().length>0||(st.food!==null&&!!CFG.foods[st.food]);
+const food=()=>{
+  const c=st.customFood.trim();
+  if(c)return['🍽️',c];
+  return CFG.foods[st.food??0]||['🍽️','맛있는 거'];
+};
+function updateFoodBtns(){
+  $('lock-food').disabled=!hasFood()||st.rolling||st.editingFoods;
+  $('roll').disabled=st.rolling||st.editingFoods||CFG.foods.length<2;
+  $('food-edit-toggle').textContent=st.editingFoods?'✓ 수정 완료':'✏ 메뉴 수정';
+}
 function renderFoods(hl){
   const box=$('foods');box.innerHTML='';
-  CFG.foods.forEach((f,i)=>{const b=document.createElement('button');b.type='button';
-    b.className='chip'+(st.food===i&&hl==null?' on':'')+(hl===i?' hl':'');
-    const s=document.createElement('span');s.textContent=f[0];b.appendChild(s);b.appendChild(document.createTextNode(f[1]));
-    b.onclick=()=>{if(st.rolling)return;st.food=i;renderFoods()};box.appendChild(b)});
-  $('lock-food').disabled=st.food===null||st.rolling;
+  box.classList.toggle('editing',st.editingFoods);
+  if(st.editingFoods){
+    CFG.foods.forEach((f,i)=>{
+      const row=document.createElement('div');row.className='fedit-row';
+      const em=document.createElement('input');em.maxLength=4;em.value=f[0];em.setAttribute('aria-label','이모지');
+      const nm=document.createElement('input');nm.maxLength=12;nm.value=f[1];nm.setAttribute('aria-label','메뉴 이름');
+      const del=document.createElement('button');del.type='button';del.className='fdel';del.textContent='✕';del.setAttribute('aria-label','메뉴 삭제');
+      em.oninput=()=>{CFG.foods[i][0]=em.value.trim()||'🍽️';saveCfg()};
+      nm.oninput=()=>{CFG.foods[i][1]=nm.value.trim()||'메뉴';saveCfg()};
+      del.onclick=()=>{
+        if(CFG.foods.length<=1){toast('메뉴는 최소 1개는 남겨줘!');return}
+        CFG.foods.splice(i,1);
+        if(st.food===i)st.food=null;
+        else if(st.food>i)st.food--;
+        saveCfg();renderFoods();
+      };
+      row.append(em,nm,del);box.appendChild(row);
+    });
+  }else{
+    CFG.foods.forEach((f,i)=>{const b=document.createElement('button');b.type='button';
+      b.className='chip'+(st.food===i&&!st.customFood.trim()&&hl==null?' on':'')+(hl===i?' hl':'');
+      const s=document.createElement('span');s.textContent=f[0];b.appendChild(s);b.appendChild(document.createTextNode(f[1]));
+      b.onclick=()=>{if(st.rolling)return;st.food=i;st.customFood='';$('food-custom').value='';renderFoods()};box.appendChild(b)});
+  }
+  updateFoodBtns();
+}
+function addFoodFromInput(){
+  const raw=$('food-custom').value.trim();
+  if(!raw){toast('추가할 메뉴 이름을 먼저 적어줘!');$('food-custom').focus();return}
+  CFG.foods.push(['🍽️',raw]);
+  st.food=CFG.foods.length-1;
+  st.customFood='';
+  $('food-custom').value='';
+  saveCfg();
+  renderFoods();
+  toast(`"${raw}" 메뉴에 추가됐어!`);
 }
 function roll(){
-  if(st.rolling)return;st.rolling=true;$('roll').disabled=true;
-  const target=Math.floor(Math.random()*9);let i=Math.floor(Math.random()*9),steps=18+Math.floor(Math.random()*9),delay=60;
-  const tick=()=>{renderFoods(i%9);if(steps-- >0||i%9!==target){i++;delay+=9;setTimeout(tick,delay)}else{st.rolling=false;st.food=target;$('roll').disabled=false;renderFoods();boom({particleCount:50,spread:60,origin:{y:.6}})}};
+  const len=CFG.foods.length;
+  if(st.rolling||st.editingFoods||len<2)return;
+  st.rolling=true;st.customFood='';$('food-custom').value='';updateFoodBtns();
+  const target=Math.floor(Math.random()*len);let i=Math.floor(Math.random()*len),steps=18+Math.floor(Math.random()*len),delay=60;
+  const tick=()=>{renderFoods(i%len);if(steps-- >0||i%len!==target){i++;delay+=9;setTimeout(tick,delay)}else{st.rolling=false;st.food=target;renderFoods();boom({particleCount:50,spread:60,origin:{y:.6}})}};
   tick();
 }
-const food=()=>CFG.foods[st.food??0];
 function renderEnd(){
   const f=food();
   $('e-main').textContent=CFG.end.replace('{메뉴}',`${f[0]} ${f[1]}`);
@@ -353,37 +434,60 @@ function texts(anim){
 yes.onclick=()=>show('yes');
 $('go-date').onclick=()=>show('date');
 $('lock-date').onclick=()=>show('food');
-$('back').onclick=()=>{if(!st.rolling)show('date')};
-$('lock-food').onclick=()=>{if(st.food!==null&&!st.rolling)show('end')};
+$('back').onclick=()=>{if(!st.rolling){st.editingFoods=false;show('date')}};
+$('lock-food').onclick=()=>{if(hasFood()&&!st.rolling&&!st.editingFoods)show('end')};
 $('roll').onclick=roll;
+$('food-custom').addEventListener('input',e=>{
+  st.customFood=e.target.value;
+  if(st.customFood.trim()){st.food=null;renderFoods()}else{updateFoodBtns()}
+});
+$('food-custom').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();addFoodFromInput()}});
+$('food-add').onclick=addFoodFromInput;
+$('food-edit-toggle').onclick=()=>{
+  if(st.rolling)return;
+  st.editingFoods=!st.editingFoods;
+  if(!st.editingFoods)toast('메뉴 수정이 저장됐어!');
+  renderFoods();
+};
 $('copy').onclick=()=>{const t=planText(),ok=()=>toast('복사됐어! 붙여넣어서 보내면 돼 📋');
   const fb=()=>{const a=document.createElement('textarea');a.value=t;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(_){}a.remove();ok()};
   navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(t).then(ok).catch(fb):fb()};
 if(navigator.share)$('share').classList.remove('hidden');
 $('share').onclick=()=>{navigator.share({text:planText()}).catch(()=>{})};
-$('restart').onclick=()=>{st.day=null;st.time=null;st.food=null;checkDate();resetNo();texts(true);show('ask')};
+$('restart').onclick=()=>{st.day=null;st.time=null;st.food=null;st.customFood='';st.editingFoods=false;$('food-custom').value='';checkDate();resetNo();texts(true);show('ask')};
 
 /* ---------- 수정 화면 ---------- */
+function appendModalFoodRow(emVal,nmVal){
+  const box=$('m-foods');
+  const r=document.createElement('div');r.className='frow';
+  const em=document.createElement('input');em.maxLength=4;em.value=emVal;em.setAttribute('aria-label','이모지');
+  const nm=document.createElement('input');nm.maxLength=12;nm.value=nmVal;nm.setAttribute('aria-label','메뉴 이름');
+  const del=document.createElement('button');del.type='button';del.className='fdel';del.textContent='✕';del.setAttribute('aria-label','메뉴 삭제');
+  del.onclick=()=>{if(box.children.length<=1){toast('메뉴는 최소 1개는 남겨줘!');return}r.remove()};
+  r.append(em,nm,del);box.appendChild(r);
+}
 function fillModal(){
   $('m-ask').value=CFG.ask;$('m-yes').value=CFG.yes;$('m-no').value=CFG.no;$('m-teases').value=CFG.teases.join('\n');
   $('m-yesT').value=CFG.yesT;$('m-yesS').value=CFG.yesS;$('m-times').value=CFG.times;$('m-end').value=CFG.end;$('m-ps').value=CFG.ps;
   const box=$('m-foods');box.innerHTML='';
-  CFG.foods.forEach(f=>{const r=document.createElement('div');r.className='frow';
-    r.innerHTML='<input maxlength="4" aria-label="이모지"><input maxlength="12" aria-label="메뉴 이름">';
-    r.children[0].value=f[0];r.children[1].value=f[1];box.appendChild(r)});
+  CFG.foods.forEach(f=>appendModalFoodRow(f[0],f[1]));
 }
 function readModal(){
   const v=id=>$(id).value.trim();
+  const foods=[...$('m-foods').children]
+    .map(r=>[r.children[0].value.trim()||'🍽️',r.children[1].value.trim()])
+    .filter(f=>f[1]);
   return{ask:$('m-ask').value.trim(),yes:v('m-yes'),no:v('m-no'),teases:$('m-teases').value.split('\n').map(s=>s.trim()).filter(Boolean),
    yesT:v('m-yesT'),yesS:v('m-yesS'),times:v('m-times'),end:v('m-end'),ps:$('m-ps').value.trim(),
-   foods:[...$('m-foods').children].map(r=>[r.children[0].value.trim(),r.children[1].value.trim()])};
+   foods:foods.length?foods:clone(DEF.foods)};
 }
-function apply(o){CFG=clone(DEF);merge(o);resetNo();texts()}
+function apply(o){CFG=clone(DEF);merge(o);if(st.food!==null&&st.food>=CFG.foods.length)st.food=null;resetNo();texts()}
 const openM=()=>{fillModal();$('modal').classList.add('open')},closeM=()=>$('modal').classList.remove('open');
 $('b-edit').onclick=openM;$('m-close').onclick=closeM;
+$('m-add-food').onclick=()=>{appendModalFoodRow('🍽️','');const last=$('m-foods').lastElementChild;if(last)last.children[1].focus()};
 $('modal').addEventListener('click',e=>{if(e.target===$('modal'))closeM()});
-$('m-save').onclick=()=>{const o=readModal();apply(o);try{localStorage.setItem(KEY,JSON.stringify(CFG))}catch(_){}closeM();toast('저장됐어! 🔗 링크 복사로 상대에게 보내요')};
-$('m-link').onclick=()=>{const o=readModal();apply(o);try{localStorage.setItem(KEY,JSON.stringify(CFG))}catch(_){}
+$('m-save').onclick=()=>{const o=readModal();apply(o);saveCfg();closeM();toast('저장됐어! 🔗 링크 복사로 상대에게 보내요')};
+$('m-link').onclick=()=>{const o=readModal();apply(o);saveCfg();
   const url=location.origin==='null'||location.protocol==='file:'?location.href.split('#')[0]+'#c='+encodeURIComponent(enc(CFG)):location.origin+location.pathname+'#c='+encodeURIComponent(enc(CFG));
   const ok=()=>toast('링크 복사 완료! 이걸 보내면 수정한 내용이 보여요 💌');
   const fb=()=>{const a=document.createElement('textarea');a.value=url;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(_){}a.remove();ok()};
