@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#ffc2e0">
 <title>밥 먹자</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hi+Melody&family=Gowun+Dodum&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 <style>
 :root{--bg:#ffc9e3;--ink:#5a0f3a;--pink:#ff4fa3;--pink2:#ff93c9;--pale:#ffe6f2;--card:#fff8fc;--muted:#b0588a}
@@ -14,66 +14,66 @@
 html,body{margin:0;min-height:100%;overscroll-behavior:none}
 body{min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top)) 16px max(16px,env(safe-area-inset-bottom));
 background:radial-gradient(circle at 20% 10%,#ffe3f1 0,transparent 45%),radial-gradient(circle at 85% 90%,#ff9fcf 0,transparent 50%),var(--bg);
-color:var(--ink);font-family:'Noto Sans KR',system-ui,sans-serif;font-weight:500;overflow-x:hidden;touch-action:manipulation}
-h1,h2,button,.chip,.jua{font-family:'Jua','Noto Sans KR',sans-serif;font-weight:400}
+color:var(--ink);font-family:'Gowun Dodum','Noto Sans KR',system-ui,sans-serif;overflow-x:hidden;touch-action:manipulation}
+h1,h2,button,.chip,h3{font-family:'Hi Melody','Gowun Dodum',sans-serif;font-weight:400}
 .float{position:fixed;font-size:28px;opacity:.7;pointer-events:none;animation:fl 8s ease-in-out infinite}
 @keyframes fl{50%{transform:translateY(-16px) rotate(12deg) scale(1.1)}}
 header{position:fixed;top:max(10px,env(safe-area-inset-top));right:10px;z-index:30}
-header button{font-size:14px;padding:7px 14px;border-radius:99px;border:2.5px solid var(--ink);background:#fff;cursor:pointer;color:var(--ink);box-shadow:0 3px 0 var(--ink)}
+header button{font-size:17px;padding:7px 14px;border-radius:99px;border:2.5px solid var(--ink);background:#fff;cursor:pointer;color:var(--ink);box-shadow:0 3px 0 var(--ink)}
 main{width:100%;max-width:440px;position:relative;z-index:5}
 .card{background:var(--card);border:3px solid var(--ink);border-radius:30px;box-shadow:8px 8px 0 var(--pink);padding:28px 22px 26px;text-align:center;animation:pop .4s cubic-bezier(.34,1.56,.64,1)}
 .hidden{display:none!important}
 @keyframes pop{from{opacity:0;transform:translateY(14px) scale(.95)}}
-h1{font-size:clamp(26px,7.4vw,33px);line-height:1.25;margin:6px 0 22px}
-h2{font-size:clamp(24px,6.6vw,30px);line-height:1.25;margin:4px 0 6px}
+h1{font-size:clamp(30px,8.4vw,38px);line-height:1.25;margin:6px 0 22px}
+h2{font-size:clamp(28px,7.6vw,34px);line-height:1.25;margin:4px 0 6px}
 .sub{font-size:14px;color:var(--muted);margin:0 0 18px}
 .pug{position:relative;width:136px;height:136px;margin:0 auto 14px}
 .pug img{width:100%;height:100%;object-fit:cover;border-radius:38px;border:3px solid var(--ink);background:var(--pale);transform:rotate(-4deg);box-shadow:5px 5px 0 var(--pink2)}
 .pug.wob img{animation:wob .45s}
 @keyframes wob{25%{transform:rotate(9deg) scale(1.06)}50%{transform:rotate(-12deg)}75%{transform:rotate(6deg)}}
 .bub{position:absolute;right:-18px;top:-10px;font-size:30px;background:#fff;border:2.5px solid var(--ink);border-radius:50%;width:50px;height:50px;display:grid;place-items:center;transform:rotate(8deg)}
-.btn{border:3px solid var(--ink);border-radius:18px;padding:13px 26px;font-size:20px;cursor:pointer;color:var(--ink);background:#fff;box-shadow:0 4px 0 var(--ink);transition:transform .12s,box-shadow .12s;touch-action:manipulation}
+.btn{border:3px solid var(--ink);border-radius:18px;padding:12px 26px;font-size:24px;cursor:pointer;color:var(--ink);background:#fff;box-shadow:0 4px 0 var(--ink);transition:transform .12s,box-shadow .12s;touch-action:manipulation}
 .btn:active:not(:disabled){transform:translateY(4px);box-shadow:0 0 0 var(--ink)}
 .btn.main{background:var(--pink);color:#fff;text-shadow:0 2px 0 rgba(90,15,58,.35)}
 .btn.soft{background:var(--pink2)}
 .btn:disabled{opacity:.4;cursor:not-allowed}
 .row{display:flex;gap:14px;justify-content:center;align-items:center;min-height:64px}
-#yes{--s:1;transform:scale(var(--s));transition:transform .3s cubic-bezier(.34,1.56,.64,1);font-size:22px;padding:14px 34px}
+#yes{--s:1;transform:scale(var(--s));transition:transform .3s cubic-bezier(.34,1.56,.64,1);font-size:26px;padding:12px 34px}
 #yes:active{transform:scale(calc(var(--s)*.95))}
 #no{touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
 #no.fly{position:fixed;left:0;top:0;z-index:60;transition:transform .28s cubic-bezier(.34,1.56,.64,1);will-change:transform}
 #tease{min-height:22px;margin:26px 0 0;font-size:14px;color:var(--muted)}
-.badge{display:inline-block;font-family:'Jua';font-size:14px;padding:4px 14px;border:2.5px solid var(--ink);border-radius:99px;background:var(--pink2);margin-bottom:10px}
-.label{font-family:'Jua';font-size:15px;text-align:left;margin:14px 0 8px}
+.badge{display:inline-block;font-family:'Hi Melody';font-size:17px;padding:4px 14px;border:2.5px solid var(--ink);border-radius:99px;background:var(--pink2);margin-bottom:10px}
+.label{font-family:'Hi Melody';font-size:19px;text-align:left;margin:14px 0 8px}
 .strip{display:flex;gap:8px;overflow-x:auto;padding:4px 4px 12px;margin:0 -4px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;touch-action:pan-x}
-.chip{flex:0 0 auto;border:2.5px solid var(--ink);border-radius:16px;background:#fff;padding:8px 12px;min-width:66px;font-size:17px;cursor:pointer;color:var(--ink);scroll-snap-align:start;line-height:1.2}
-.chip small{display:block;font-family:'Noto Sans KR';font-size:11px;color:var(--muted)}
+.chip{flex:0 0 auto;border:2.5px solid var(--ink);border-radius:16px;background:#fff;padding:8px 12px;min-width:66px;font-size:20px;cursor:pointer;color:var(--ink);scroll-snap-align:start;line-height:1.2}
+.chip small{display:block;font-family:'Gowun Dodum';font-size:11px;color:var(--muted)}
 .chip.we{background:var(--pale)}
 .chip.on,.chip.hl{background:var(--pink);color:#fff;box-shadow:0 3px 0 var(--ink);transform:translateY(-2px)}
 .chip.on small{color:#ffe0f0}
 .grid{display:grid;gap:8px}
 .times{grid-template-columns:repeat(4,1fr)}
-.times .chip{min-width:0;padding:10px 2px;font-size:15px}
+.times .chip{min-width:0;padding:10px 2px;font-size:18px}
 .foods{grid-template-columns:repeat(3,1fr);margin-bottom:12px}
-.foods .chip{padding:12px 4px;font-size:16px}
+.foods .chip{padding:12px 4px;font-size:19px}
 .foods .chip span{display:block;font-size:30px;line-height:1.1;margin-bottom:2px}
 .foods .chip.hl{transform:scale(1.07)}
 .err{min-height:18px;font-size:13px;color:var(--pink);margin:6px 0}
 .nav{display:flex;gap:10px;margin-top:8px}
-.nav .btn{font-size:17px;padding:12px 16px}.nav .grow{flex:1}
+.nav .btn{font-size:21px;padding:12px 16px}.nav .grow{flex:1}
 .ticket{position:relative;border:3px dashed var(--ink);border-radius:20px;background:#fff;padding:18px 14px 14px;margin:6px 0 16px;text-align:left}
-.ticket .big{font-family:'Jua';font-size:clamp(22px,6.4vw,28px);line-height:1.3;text-align:center;margin:2px 0 12px}
+.ticket .big{font-family:'Hi Melody';font-size:clamp(28px,7.6vw,34px);line-height:1.3;text-align:center;margin:2px 0 12px}
 .kv{display:flex;justify-content:space-between;gap:8px;font-size:15px;padding:8px 0;border-top:2px dotted var(--pink2)}
-.kv b{font-family:'Jua';font-weight:400}
-.stamp{position:absolute;right:-6px;top:-18px;transform:rotate(12deg);font-family:'Jua';font-size:20px;color:var(--pink);border:3px solid var(--pink);border-radius:10px;padding:2px 10px;background:#fff;animation:st .5s .3s cubic-bezier(.34,1.56,.64,1) both}
+.kv b{font-family:'Hi Melody';font-weight:400}
+.stamp{position:absolute;right:-6px;top:-18px;transform:rotate(12deg);font-family:'Hi Melody';font-size:24px;color:var(--pink);border:3px solid var(--pink);border-radius:10px;padding:2px 10px;background:#fff;animation:st .5s .3s cubic-bezier(.34,1.56,.64,1) both}
 @keyframes st{from{transform:scale(3) rotate(40deg);opacity:0}}
 .ps{font-size:13px;color:var(--muted);margin:0 0 16px;line-height:1.5;white-space:pre-line}
-.btns{display:flex;flex-direction:column;gap:10px}.btns .btn{font-size:17px}
+.btns{display:flex;flex-direction:column;gap:10px}.btns .btn{font-size:21px}
 #modal{position:fixed;inset:0;z-index:100;background:rgba(90,15,58,.55);align-items:flex-start;justify-content:center;padding:14px;display:none;overflow:auto}
 #modal.open{display:flex}
 #modal .box{background:#fff;border:3px solid var(--ink);border-radius:24px;padding:18px;width:100%;max-width:460px;margin:auto}
-#modal h3{font-family:'Jua';font-weight:400;font-size:22px;margin:0}
-#modal .sec{font-family:'Jua';color:var(--pink);margin:18px 0 4px;font-size:16px}
+#modal h3{font-weight:400;font-size:26px;margin:0}
+#modal .sec{font-family:'Hi Melody';color:var(--pink);margin:18px 0 4px;font-size:21px}
 #modal label{display:block;font-size:13px;color:var(--muted);margin:10px 0 3px}
 #modal input,#modal textarea{width:100%;padding:10px 12px;border:2px solid var(--ink);border-radius:12px;font:inherit;font-size:16px;background:var(--card);color:var(--ink)}
 .frow{display:grid;grid-template-columns:64px 1fr;gap:8px;margin-bottom:8px}.frow input:first-child{text-align:center;font-size:22px;padding:6px}
@@ -183,11 +183,11 @@ h2{font-size:clamp(24px,6.6vw,30px);line-height:1.25;margin:4px 0 6px}
 const $=id=>document.getElementById(id);
 const KEY='date_invite_cfg_v3';
 const DEF={
- ask:'이번 주에 시간 돼?\n밥 먹자 🍚',yes:'좋아 😆',no:'안 돼',
- teases:['어? 버튼이 미끄럽네 🧈','손가락이 느린데~','그쪽은 함정이야 😏','강아지가 다 보고 있어 🐶','잡을 수 있으면 잡아봐','이쯤 되면 운명인데?','"좋아"가 훨씬 가까워 👈','체력 아껴 ㅋㅋ','거의 잡았다 (거짓말)','안 돼 버튼은 퇴근했습니다 🏃'],
- yesT:'오, 진짜?! 🎉',yesS:'거절할 줄 알고 다른 멘트 준비했는데 다행이네.',go:'일정 정하기 →',
+ ask:'야 이번 주에\n밥 먹자 🍚',yes:'좋아 😆',no:'안 돼',
+ teases:['어? 버튼이 왜 이래 ㅋㅋ','방금 손가락 닿을 뻔했다','퍼그가 한심하게 쳐다보는 중 😑','그거 누르려고 한 거야?','반응속도 인정','안 돼 버튼은 지금 운동 중 🏃','포기하면 편해 👈','잡으면 내가 밥 산다 (안 잡힘)','손가락 아프겠다 그만해 ㅋㅋ','야 이쯤 되면 걍 가자','퍼그 표정 봐 이미 알고 있어','제발 "좋아" 눌러줘 ㅠ'],
+ yesT:'오 ㅋㅋ 진짜?!',yesS:'거절하면 어쩌나 했는데 다행이다 ㅋㅋ',go:'일정 정하기 →',
  dateT:'언제가 편해?',foodT:'뭐 먹을까?',foodS:'하나 골라줘. 못 고르겠으면 룰렛!',
- end:'{메뉴} 먹으러 가자!',ps:'P.S. 카톡으로 물어봐도 되는데 그냥 심심해서 페이지 하나 만들어 봤어.',
+ end:'{메뉴} 먹으러 가자!',ps:'P.S. 카톡으로 물어봐도 되는데 그냥 심심해서 만들어 봤어 ㅋㅋ 저 퍼그는 공식 마스코트야.',
  foods:[['🍕','피자'],['🍣','스시'],['🍔','버거'],['🍝','파스타'],['🌮','타코'],['🍜','라멘'],['🥓','삼겹살'],['🍗','치킨'],['🌶️','떡볶이']],
  times:'11:30,12:00,13:00,17:00,18:00,19:00,20:00,21:00'
 };
@@ -206,10 +206,9 @@ try{const m=location.hash.match(/^#c=(.+)$/);if(m){merge(dec(decodeURIComponent(
 if(!fromLink)try{merge(JSON.parse(localStorage.getItem(KEY)||'null'))}catch(_){}
 if(fromLink&&!/[?&]edit/.test(location.search))$('b-edit').classList.add('hidden');
 
-/* 마스코트: mascot.png를 올리면 그걸 쓰고, 없으면 기본 강아지 */
-const SVG=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#ffd3ea"/><g stroke="#5a0f3a" stroke-width="5" stroke-linejoin="round"><ellipse cx="38" cy="108" rx="21" ry="46" transform="rotate(14 38 108)" fill="#f2b705"/><ellipse cx="162" cy="108" rx="21" ry="46" transform="rotate(-14 162 108)" fill="#f2b705"/><ellipse cx="100" cy="112" rx="68" ry="62" fill="#ffd93b"/></g><circle cx="78" cy="102" r="9" fill="#2b0a1c"/><circle cx="122" cy="102" r="9" fill="#2b0a1c"/><circle cx="81" cy="98" r="3" fill="#fff"/><circle cx="125" cy="98" r="3" fill="#fff"/><circle cx="62" cy="124" r="10" fill="#ff7fb8" opacity=".55"/><circle cx="138" cy="124" r="10" fill="#ff7fb8" opacity=".55"/><ellipse cx="100" cy="120" rx="13" ry="9" fill="#2b0a1c"/><path d="M100 129q-14 18-30 4M100 129q14 18 30 4" fill="none" stroke="#5a0f3a" stroke-width="5" stroke-linecap="round"/><path d="M90 140q10 24 20 0z" fill="#ff5fa0" stroke="#5a0f3a" stroke-width="4" stroke-linejoin="round"/></svg>`;
-const FALL='data:image/svg+xml;utf8,'+encodeURIComponent(SVG);
-document.querySelectorAll('.mascot').forEach(i=>{i.onerror=()=>{i.onerror=null;i.src=FALL};i.src='mascot.png'});
+/* 마스코트: 저장소에 올린 mascot.jpg 사용 (없으면 🐶 이모지) */
+const FALL='data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#ffd3ea"/><text x="50" y="68" font-size="60" text-anchor="middle">🐶</text></svg>');
+document.querySelectorAll('.mascot').forEach(i=>{i.onerror=()=>{i.onerror=null;i.src=FALL};i.src='mascot.jpg'});
 
 let tt;const toast=m=>{const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2600)};
 const boom=o=>{if(typeof confetti==='function')confetti(Object.assign({colors:['#ff4fa3','#ff93c9','#ffe6f2','#5a0f3a','#fff'],disableForReducedMotion:true},o))};
